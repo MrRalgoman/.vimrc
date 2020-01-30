@@ -10,14 +10,11 @@ call vundle#begin()
 Plugin 'VundleVim/Vundle.vim'
 Plugin 'scrooloose/nerdtree'
 Plugin 'kien/ctrlp.vim'
-Plugin 'pangloss/vim-javascript'
-Plugin 'ervandew/supertab'
 Plugin 'w0rp/ale'
-Plugin 'vim-scripts/gmlua.vim'
 Plugin 'sonph/onehalf', {'rtp': 'vim/'}
-Plugin 'vim-syntastic/syntastic'
 Plugin 'zxqfl/tabnine-vim'
-Plugin 'easymotion/vim-easymotion'
+Plugin 'git://github.com/urso/haskell_syntax.vim.git'
+Plugin 'sjl/badwolf'
 call vundle#end()            " required
 
 filetype plugin indent on    " required
@@ -25,20 +22,17 @@ filetype plugin indent on    " required
 
 " True colors?
 if exists('+termguicolors')
-    let &t_8f = "\<Esc>[38;2;%lu;%lu;%lum"
-    let &t_8b = "\<Esc>[48;2;%lu;%lu;%lum"
-    set termguicolors
+let &t_8f = "\<Esc>[38;2;%lu;%lu;%lum"
+let &t_8b = "\<Esc>[48;2;%lu;%lu;%lum"
+set termguicolors
 endif
 
 " One half dark color theme
 syntax on
 set t_Co=256
-colorscheme onehalfdark
-:set syntax=lua
-
-" Easy Motion
-nnoremap <Space> <Plug>(easymotion-bd-w)
-nmap <Space> <Plug>(easymotion-overwin-w)
+colorscheme badwolf
+"onehalfdark
+:set syntax=haskell
 
 " Cursor type per mode
 let &t_EI = "\e[2 q" " block on normal
@@ -50,6 +44,9 @@ let &t_SI = "\e[5 q" " blinking line on insert
 " Ctrl-p mapping
 let g:ctrlp_map = '<c-p>'
 let g:ctrlp_cmd = 'CtrlP'
+
+" Always show status line
+:set laststatus=2
 
 " Enable javascript syntax plugin
 let g:javascript_plugin_jsdoc = 1
@@ -71,11 +68,6 @@ nnoremap <F5> :NERDTree<CR>
 set tabstop=4
 set shiftwidth=4
 set expandtab
-
-" Python powerline stuff
-python3 from powerline.vim import setup as powerline_setup
-python3 powerline_setup()
-python3 del powerline_setup
 
 " Set python syntax to 3
 let g:syntastic_python_checkers=['flake8']
