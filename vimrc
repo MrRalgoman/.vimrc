@@ -11,10 +11,9 @@ Plugin 'VundleVim/Vundle.vim'
 Plugin 'scrooloose/nerdtree'
 Plugin 'kien/ctrlp.vim'
 Plugin 'w0rp/ale'
-Plugin 'sonph/onehalf', {'rtp': 'vim/'}
+Plugin 'gosukiwi/vim-atom-dark' "Plugin 'sonph/onehalf', {'rtp': 'vim/'}
 Plugin 'zxqfl/tabnine-vim'
-Plugin 'git://github.com/urso/haskell_syntax.vim.git'
-Plugin 'sjl/badwolf'
+Plugin 'mattn/emmet-vim'
 call vundle#end()            " required
 
 filetype plugin indent on    " required
@@ -22,17 +21,28 @@ filetype plugin indent on    " required
 
 " True colors?
 if exists('+termguicolors')
-let &t_8f = "\<Esc>[38;2;%lu;%lu;%lum"
-let &t_8b = "\<Esc>[48;2;%lu;%lu;%lum"
-set termguicolors
+    let &t_8f = "\<Esc>[38;2;%lu;%lu;%lum"
+    let &t_8b = "\<Esc>[48;2;%lu;%lu;%lum"
+    set termguicolors
 endif
 
-" One half dark color theme
+" atom-dark dark color theme
 syntax on
 set t_Co=256
-colorscheme badwolf
-"onehalfdark
-:set syntax=haskell
+colorscheme atom-dark "onehalfdark
+" badwolf
+" :set syntax=haskell
+
+" always show status bar
+set laststatus=2
+
+" show cursorline/cursorcolumn
+set cursorline
+hi CursorLine cterm=NONE
+
+" Easy Motion
+nnoremap <Space> <Plug>(easymotion-bd-w)
+nmap <Space> <Plug>(easymotion-overwin-w)
 
 " Cursor type per mode
 let &t_EI = "\e[2 q" " block on normal
@@ -45,11 +55,14 @@ let &t_SI = "\e[5 q" " blinking line on insert
 let g:ctrlp_map = '<c-p>'
 let g:ctrlp_cmd = 'CtrlP'
 
-" Always show status line
-:set laststatus=2
-
-" Enable javascript syntax plugin
-let g:javascript_plugin_jsdoc = 1
+" Close common coding characters
+inoremap " ""<left>
+inoremap ' ''<left>
+inoremap ( ()<left>
+inoremap [ []<left>
+inoremap { {}<left>
+inoremap {<CR> {<CR>}<ESC>O
+inoremap {;<CR> {<CR>};<ESC>O
 
 " Set relative numbering
 set nu
